@@ -1,6 +1,8 @@
 package prob_monad.explicit
 
-import prob_monad.explicit.ExplicitInstances._
+import prob_monad.distribution.discrete.CoinDistribution
+import prob_monad.distribution.discrete.CoinDistributionInstances._
+
 import scalaz.Scalaz._
 
 sealed trait Coin
@@ -9,8 +11,8 @@ case object Tails extends Coin
 
 object CoinToss extends App {
 
-  def coin: Explicit[Coin] = Explicit(Heads -> 0.5 :: Tails -> 0.5 :: Nil)
-  def loadedCoin: Explicit[Coin] = Explicit(Heads -> 0.1 :: Tails -> 0.9 :: Nil)
+  def coin: CoinDistribution[Coin] = CoinDistribution(Heads -> 0.5 :: Tails -> 0.5 :: Nil)
+  def loadedCoin: CoinDistribution[Coin] = CoinDistribution(Heads -> 0.1 :: Tails -> 0.9 :: Nil)
 
   val result = for {
     a <- coin
